@@ -1,10 +1,16 @@
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-app.Run(async (context) =>
+app.MapGet("/download", () =>
 {
-    context.Response.Headers.ContentDisposition = "attachment; filename=Capri Island.jpg";
-    await context.Response.SendFileAsync("Capri.jpg");
+    var filePath = Path.Combine(app.Environment.ContentRootPath, "Capri.jpg");
+
+    // Використовуємо універсальний Results.File
+    return Results.File(
+        path: filePath,
+        contentType: "image/jpeg",
+        fileDownloadName: "Острів Капрі.jpg"
+    );
 });
 
 app.Run();
