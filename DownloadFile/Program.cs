@@ -3,7 +3,7 @@ var app = builder.Build();
 
 app.MapGet("/download", () =>
 {
-    var filePath = Path.Combine(app.Environment.ContentRootPath, "Capri.jpg");
+    var filePath = Path.Combine(app.Environment.WebRootPath, "Capri.jpg");
 
     // Використовуємо універсальний Results.File
     return Results.File(
